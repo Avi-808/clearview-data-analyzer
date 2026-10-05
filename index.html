@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090d16">
+  <meta name="description" content="Drop a spreadsheet and get clear charts and instant answers from your data.">
+  <title>Clearview — Instant data stories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="instant.css"><link rel="stylesheet" href="simple.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#"><span class="brand-icon">C</span> clearview</a><span class="privacy"><span>◈</span> Your file stays on your device</span></header>
+  <main>
+    <section class="hero"><div class="eyebrow"><span></span> ADD YOUR DATA</div><h1>Drop your file.<br><em>Get answers.</em></h1><p>Add a spreadsheet. Your chart and answers appear automatically.</p></section>
+    <section id="dropStage" class="drop-stage"><div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="Choose or drop a CSV or Excel file"><div class="upload-art"><span class="file-back">▤</span><span class="file-front">↑</span><i>✦</i></div><h2>Drop a file here</h2><p>Choose a file. We will make a chart and find the key numbers.</p><button id="browseButton" class="browse-button">Choose file <span>↗</span></button><div class="file-types"><span>CSV</span><span>Excel</span><span>CSV</span><i>Up to 25 MB</i></div></div><div class="sample-prompt"><span class="sample-spark">✦</span><span>Or</span><button id="sampleButton">See an example <span>→</span></button></div><div id="errorBanner" class="error-banner" role="alert" hidden></div></section>
+    <section id="resultsStage" class="results-stage" hidden>
+      <div class="result-top"><div><div class="eyebrow"><span></span> YOUR RESULTS</div><h2 id="fileTitle">Dataset overview</h2><p id="datasetMeta">Your file is ready</p></div><div class="result-actions"><button id="replaceButton" class="quiet-button">＋ Change file</button><button id="downloadButton" class="export-button">↓ Download results</button></div></div>
+      <div id="dropMini" class="drop-mini" tabindex="0"><span>＋</span> Drop another file or <button id="replaceLink">browse</button> <small>Drop a new file to replace this one</small></div>
+      <section class="question-panel"><div class="question-title"><span class="question-mark">✳</span><div><strong>Ask a question</strong><small>Example: Which region sold the most?</small></div></div><form id="questionForm"><input id="questionInput" autocomplete="off" placeholder="Which region sold the most?" aria-label="Ask a question about your data"><button type="submit">Answer <span>→</span></button></form><div class="suggestions"><button type="button" data-question="What is the total?">Total?</button><button type="button" data-question="What is the average?">Average?</button><button type="button" data-question="Which category is highest?">Highest?</button><button type="button" data-question="Describe the trend">Trend?</button></div><div id="answerBox" class="answer-box" hidden></div></section>
+      <div class="metric-grid"><article class="metric-card"><span class="metric-label">ROWS</span><strong id="rowMetric">—</strong><small>in your file</small></article><article class="metric-card"><span class="metric-label">TOTAL</span><strong id="totalMetric">—</strong><small id="totalMetricLabel">selected measure</small></article><article class="metric-card"><span class="metric-label">AVERAGE</span><strong id="averageMetric">—</strong><small>per record</small></article><article class="metric-card"><span class="metric-label">CHANGE</span><strong id="changeMetric">—</strong><small>from start to end</small></article></div>
+      <div class="analysis-layout"><section class="chart-card"><div class="chart-heading"><div><h3 id="chartHeading">Your chart</h3><p id="chartDescription">See how the numbers compare.</p></div></div><details class="customize"><summary>More chart options</summary><div class="customize-content"><div class="chart-types"><button class="chart-type active" data-chart="auto">Auto</button><button class="chart-type" data-chart="bar">Bars</button><button class="chart-type" data-chart="line">Line</button></div><div class="mapping-row"><label>Numbers <select id="measureSelect" aria-label="Choose numbers"></select></label><span>grouped by</span><label><select id="labelSelect" aria-label="Choose groups"></select></label></div></div></details><div class="chart-box"><div id="axis" class="axis"></div><div class="plot"><canvas id="chart" role="img" aria-label="Chart generated from your dataset"></canvas><div id="chartTip" class="chart-tip"></div><div id="xAxis" class="x-axis"></div></div></div><div class="chart-legend"><span><i></i><b id="legendText">Values</b></span><button id="tableToggle">View rows <span>→</span></button></div><div id="dataTable" class="data-table" hidden></div></section>
+      <aside class="insights-card"><div class="insights-title"><span>✦</span><div><h3>Quick results</h3><p>Simple facts from your file</p></div></div><div id="insightsList" class="insights-list"></div><div class="local-note"><span>◈</span> Your file stays on your device.</div></aside></div>
+      <div class="bottom-drop" id="bottomDrop">✦ &nbsp; Have another file? Drop it anywhere on this page to analyze it.</div>
+    </section>
+    <footer><span>CLEARVIEW <i>·</i> DATA STORIES MADE SIMPLE</span><span>No account <i>·</i> Your file stays private <i>·</i> Easy answers</span></footer>
+  </main>
+  <input id="fileInput" type="file" accept=".csv,.tsv,.xlsx,.xls,.xlsm,.ods" hidden>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
